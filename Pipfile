@@ -5,10 +5,16 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"
+watchdog = "*"
+unittest = "*"
 
 [packages]
 flask = "*"
 pylint = "*"
+flask-restful = "*"
+python-dotenv = "*"
+flask-restplus = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.7"
