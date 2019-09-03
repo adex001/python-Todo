@@ -1,7 +1,7 @@
 from flask_restplus import Resource
 import json
 from flask import jsonify, request, Response
-from model.todo import TodoModel
+from model import TodoModel
 from run import api
 import datetime
 
@@ -15,7 +15,7 @@ def validate_new_todo(todo):
 class TodoResource(Resource):
     def get(self):
         all_todos = TodoModel().get_todos()
-        response = Response(json.dumps({'todos': all_todos}), status=200, mimetype='application/json')
+        response = Response(json.dumps({'message': 'All Todos!','todos': all_todos}), status=200, mimetype='application/json')
         return response
     
     def post(self):
@@ -24,12 +24,9 @@ class TodoResource(Resource):
             return Response(json.dumps({'error': 'Enter a valid todo object. Todo must have title, body and completed property'}), status=400, mimetype='application/json')
         if (not validate_new_todo(request_todo)):
             return Response(json.dumps({'error': 'Enter a valid todo object. Todo must have title, body and completed property'}), status=400, mimetype='application/json')
-        id = len(TodoModel().get_todos()) + 1
-        request_todo['id'] = id
-        request_todo['date'] = str(datetime.datetime.now())
 
         todo = TodoModel().create_todo(request_todo)
-        response = Response(json.dumps({'todo': todo}), status=201, mimetype='application/json')
+        response = Response(json.dumps({'message': 'todo successfully created!','todo': todo}), status=201, mimetype='application/json')
         return response
 
 
@@ -57,4 +54,3 @@ class TodoSingleResource(Resource):
             return Response(json.dumps({'error': 'Enter either a title, body or completed'}), status=400, mimetype='application/json')
         todo = TodoModel().update_todo(todo_id, todo_object)
         return Response(json.dumps({'message': 'todo successfully updated!', 'todo': todo}), status=200, mimetype='application/json')
-        

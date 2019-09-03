@@ -6,15 +6,14 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 watchdog = "*"
-unittest = "*"
 
 [packages]
 flask = "*"
 pylint = "*"
-flask-restful = "*"
 python-dotenv = "*"
 flask-restplus = "*"
 coverage = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
